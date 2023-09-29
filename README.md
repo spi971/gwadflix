@@ -25,7 +25,7 @@ export const firebaseAuth = getAuth(app);
 ```
 
 ## Steps to Start the App
-+ Install React Dependencies
-+ Instal Node Dependencies
-+ Start Node App with ```npm start ```
-+ Start React App ```npm start ```
++ Install React Dependencies ```cd ui && npm i ```
++ Instal Node Dependencies ```cd back && npm i ```
++ Start Node App with ```cd back && npm start ```
++ Start React App ```cd ui && npm start ```
