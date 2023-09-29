@@ -2,7 +2,8 @@
 
 ## Firebase 
 You should have an firebase account.
-Then you have to create a firebase.js file in "/ui/src/config" 
+Then you have to create a firebase config file.
+```touch /ui/src/config/firebase.js ```
 The content of the file should lok like this
 ```
 import { initializeApp } from "firebase/app";
