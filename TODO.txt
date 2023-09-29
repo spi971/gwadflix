@@ -1,0 +1,2 @@
+- Get trailer for videos from API_URL
+- implement like system
