@@ -17,9 +17,7 @@ export function Favoris() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userId) {
-      dispatch(getFavoris({ userId }));
-    }
+    dispatch(getFavoris({ userId }));
   }, [userId]);
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
