@@ -4,7 +4,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 
-import { TMDB_API_KEY, TMDB_API_URL } from "../utils/constants";
+import { API_URL, TMDB_API_KEY, TMDB_API_URL } from "../utils/constants";
 
 import axios from "axios";
 
@@ -80,6 +80,38 @@ export const fetchMoviesByGenre = createAsyncThunk(
     );
   }
 );
+export const addToFavoris = createAsyncThunk(
+  "gwadflix/addfavoris",
+  async ({ userId, movie }) => {
+    const {
+      data: { movies },
+    } = await axios.post(`${API_URL}/add`, {
+      userId, data: movie
+    });
+    return movies;
+  }
+);
+
+export const getFavoris = createAsyncThunk(
+  "gwadflix/favoris",
+  async ({ userId }) => {
+    const {
+      data: { movies },
+    } = await axios.get(`${API_URL}/list/${userId}`);
+    return movies;
+  }
+);
+export const removeFromFavoris = createAsyncThunk(
+  "gwadflix/removeFavoris",
+  async ({userId, movieId}) => {
+    const {
+      data: { movies },
+    } = await axios.put(`${API_URL}/remove`, {
+      userId, movieId
+    });
+    return movies;
+  }
+);
 
 const GwadflixSlice = createSlice({
   name: "GwadFlix",
@@ -93,6 +125,12 @@ const GwadflixSlice = createSlice({
       state.movies = action.payload;
     });
     builder.addCase(fetchMoviesByGenre.fulfilled, (state, action) => {
+      state.movies = action.payload;
+    });
+    builder.addCase(getFavoris.fulfilled, (state, action) => {
+      state.movies = action.payload;
+    });
+    builder.addCase(removeFromFavoris.fulfilled, (state, action) => {
       state.movies = action.payload;
     });
   },

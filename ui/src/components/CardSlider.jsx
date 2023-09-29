@@ -6,7 +6,7 @@ import { CardSliderContainer } from "../styles";
 export const CardSlider = React.memo(function CardSlider({ data, title }) {
   const listRef = useRef();
   const [sliderPosition, setSliderPosition] = useState(0);
-  const [showControls, setShowControls] = useState(false);
+  const [showcontrols, setShowcontrols] = useState(false);
 
   const handleSliderDirection = (direction) => {
     let distance = listRef.current.getBoundingClientRect().x - 70;
@@ -30,15 +30,15 @@ export const CardSlider = React.memo(function CardSlider({ data, title }) {
   return (
     <CardSliderContainer
       className='flex column'
-      showControls={showControls}
-      onMouseEnter={() => setShowControls(true)}
-      onMouseLeave={() => setShowControls(false)}
+      showcontrols={showcontrols.toString()}
+      onMouseEnter={() => setShowcontrols(true)}
+      onMouseLeave={() => setShowcontrols(false)}
     >
       <h1>{title}</h1>
       <div className='wrapper'>
         <div
           className={`slider-action left ${
-            !showControls ? "none" : ""
+            !showcontrols ? "none" : ""
           } flex j-center a-center`}
         >
           <AiOutlineLeft onClick={() => handleSliderDirection("left")} />
@@ -52,7 +52,7 @@ export const CardSlider = React.memo(function CardSlider({ data, title }) {
 
         <div
           className={`slider-action right ${
-            !showControls ? "none" : ""
+            !showcontrols ? "none" : ""
           } flex j-center a-center`}
         >
           <AiOutlineRight onClick={() => handleSliderDirection("right")} />

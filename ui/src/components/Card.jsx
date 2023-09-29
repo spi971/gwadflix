@@ -1,4 +1,3 @@
-import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -6,30 +5,25 @@ import { BiChevronDown } from "react-icons/bi";
 import { BsCheck } from "react-icons/bs";
 import { IoPlayCircleSharp } from "react-icons/io5";
 import { RiThumbDownFill, RiThumbUpFill } from "react-icons/ri";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import video from "../assets/Sing _Trailer_3.mp4";
 import { firebaseAuth } from "../config/firebase";
+import { addToFavoris, removeFromFavoris } from "../store";
 import { CardContainer } from "../styles";
 
 export const Card = React.memo(function Card({ movieData, isLiked = false }) {
   const [isHovered, setIsHovered] = useState(false);
-  const [email, setEmail] = useState(undefined);
+  const [userId, setUserId] = useState(undefined);
   const navigate = useNavigate();
-  const API_URL = "http://localhost:5000/api/favoris/add";
+  const dispatch = useDispatch()
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (currentUser) setEmail(currentUser.email);
+    if (currentUser) setUserId(currentUser.uid);
     else navigate("/login");
   });
-
-  const addToFavoris = async () => {
-    try {
-      await axios.post(API_URL, { email, data: movieData });
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  
 
   return (
     <CardContainer
@@ -70,11 +64,11 @@ export const Card = React.memo(function Card({ movieData, isLiked = false }) {
                 <RiThumbUpFill title='Like' />
                 <RiThumbDownFill title='Dislike' />
                 {isLiked ? (
-                  <BsCheck title='Remove from list' />
+                  <BsCheck title='Remove from list' onClick={()=> dispatch(removeFromFavoris({userId, movieId: movieData.id}))} />
                 ) : (
                   <AiOutlinePlus
                     title='Add to my list'
-                    onClick={addToFavoris}
+                    onClick={()=> dispatch(addToFavoris({userId, movie: movieData}))}
                   />
                 )}
               </div>

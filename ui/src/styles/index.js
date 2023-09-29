@@ -5,6 +5,7 @@ export { HeaderContainer } from "./components/header";
 export { NavbarContainer } from "./components/navbar";
 export { Select } from "./components/select";
 
+export { FavorisContainer } from "./pages/favoris";
 export { GwadflixContainer } from "./pages/gwadflix";
 export { LoginContainer } from "./pages/login";
 export { MoviesContainer } from "./pages/movies";

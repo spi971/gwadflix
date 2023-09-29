@@ -1,3 +1,4 @@
+export { Favoris } from "./Favoris";
 export { Gwadflix } from "./Gwadflix";
 export { Login } from "./Login";
 export { Movies } from "./Movies";

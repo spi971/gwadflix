@@ -19,8 +19,9 @@ mongoose
   });
 
 app.use("/api/favoris", favorisRoutes)
-const port = 5000;
 
+
+const port = 5000;
 app.listen(port, () => {
   console.log(`Server start on port ${port}`);
 });
